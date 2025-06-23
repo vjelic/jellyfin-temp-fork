@@ -1,0 +1,609 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Glog.AI",
+          "organization": "Glog.AI",
+          "fullName": "Glog, Making software more secure",
+          "version": "1.0.0",
+          "semanticVersion": "1.0.0",
+          "informationUri": "https://www.glog.ai",
+          "rules": [
+            {
+              "id": "glog-53ff2604-62e6-43ff-a457-bd20c3696193",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Vulnerable/Compromised Hash Algorithm\" vulnerability in C# refers to the use of cryptographic hash functions that are considered weak or compromised, such as SHA-1. SHA-1 is no longer considered secure due to its vulnerability to collision attacks, where two different inputs produce the same hash output. This can lead to security issues such as data integrity violations and unauthorized data manipulation.\n\n### General Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use stronger hash algorithms such as SHA-256 or SHA-3. These algorithms provide better security and are less susceptible to collision attacks.\n\n### Source Code Fix Recommendation\n\nIf your C# code is using SHA-1, you should replace it with a more secure algorithm like SHA-256. Below is an example of how to update your code:\n\n#### Before (Using SHA-1)\n\n```csharp\nusing System;\nusing System.Security.Cryptography;\nusing System.Text;\n\nclass Program\n{\n    static void Main()\n    {\n        string input = \"example\";\n        using (SHA1 sha1 = SHA1.Create())\n        {\n            byte[] hashBytes = sha1.ComputeHash(Encoding.UTF8.GetBytes(input));\n            string hash = BitConverter.ToString(hashBytes).Replace(\"-\", \"\").ToLowerInvariant();\n            Console.WriteLine($\"SHA-1 Hash: {hash}\");\n        }\n    }\n}\n```\n\n#### After (Using SHA-256)\n\n```csharp\nusing System;\nusing System.Security.Cryptography;\nusing System.Text;\n\nclass Program\n{\n    static void Main()\n    {\n        string input = \"example\";\n        using (SHA256 sha256 = SHA256.Create())\n        {\n            byte[] hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(input));\n            string hash = BitConverter.ToString(hashBytes).Replace(\"-\", \"\").ToLowerInvariant();\n            Console.WriteLine($\"SHA-256 Hash: {hash}\");\n        }\n    }\n}\n```\n\n### Library Dependencies\n\nThe above code examples require the following .NET libraries:\n\n- `System`\n- `System.Security.Cryptography`\n- `System.Text`\n\nThese libraries are part of the .NET framework and do not require additional installation.\n\n### Relevant OWASP Resources\n\n- [OWASP Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)\n- [OWASP Top Ten 2021](https://owasp.org/Top10/)\n\n### Common Weakness Enumeration (CWE)\n\n- [CWE-327: Use of a Broken or Risky Cryptographic Algorithm](https://cwe.mitre.org/data/definitions/327.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS126858"
+                ]
+              }
+            },
+            {
+              "id": "glog-90c1521c-6ee0-440c-be56-440424c3e8af",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Vulnerable/Compromised Hash Algorithm\" vulnerability in C# arises when cryptographic hash functions that are considered weak or compromised, such as MD5, are used. MD5 is known to be vulnerable to collision attacks, where two different inputs produce the same hash output. This makes it unsuitable for security-sensitive applications, such as password hashing or digital signatures.\n\n### General Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use stronger cryptographic hash functions, such as SHA-256 or SHA-3, which are considered secure against collision attacks. Additionally, for password hashing, consider using specialized algorithms like bcrypt, scrypt, or Argon2, which are designed to be computationally expensive and include a salt to protect against rainbow table attacks.\n\n### Source Code Fix Recommendation\n\nBelow is an example of how to replace MD5 with SHA-256 in C#:\n\n```csharp\nusing System;\nusing System.Security.Cryptography;\nusing System.Text;\n\nclass Program\n{\n    static void Main()\n    {\n        string input = \"example input\";\n        string hash = ComputeSha256Hash(input);\n        Console.WriteLine($\"SHA-256 Hash: {hash}\");\n    }\n\n    static string ComputeSha256Hash(string rawData)\n    {\n        using (SHA256 sha256Hash = SHA256.Create())\n        {\n            byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));\n            StringBuilder builder = new StringBuilder();\n            for (int i = 0; i < bytes.Length; i++)\n            {\n                builder.Append(bytes[i].ToString(\"x2\"));\n            }\n            return builder.ToString();\n        }\n    }\n}\n```\n\n### Library Dependencies\n\nThe above code example requires the following .NET libraries, which are part of the standard .NET framework and do not require additional installation:\n\n- `System`\n- `System.Security.Cryptography`\n- `System.Text`\n\n### Relevant Resources\n\n- [OWASP Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)\n- [OWASP Password Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html)\n- [CWE-327: Use of a Broken or Risky Cryptographic Algorithm](https://cwe.mitre.org/data/definitions/327.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS126858"
+                ]
+              }
+            },
+            {
+              "id": "glog-08f0464b-3995-445a-8fbc-fcfcc7e3fee8",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Vulnerable/Compromised Hash Algorithm\" vulnerability in C# arises when cryptographic hash functions that are considered weak or compromised, such as MD5, are used. MD5 is known to be vulnerable to collision attacks, where two different inputs produce the same hash output. This makes it unsuitable for security-sensitive applications, such as password hashing or digital signatures.\n\n### General Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use stronger cryptographic hash functions, such as SHA-256 or SHA-3, which are considered secure against collision attacks. Additionally, for password hashing, consider using specialized algorithms like bcrypt, scrypt, or Argon2, which are designed to be computationally expensive and include a salt to protect against rainbow table attacks.\n\n### Source Code Fix Recommendation\n\nBelow is an example of how to replace MD5 with SHA-256 in C#:\n\n```csharp\nusing System;\nusing System.Security.Cryptography;\nusing System.Text;\n\nclass Program\n{\n    static void Main()\n    {\n        string input = \"example input\";\n        string hash = ComputeSha256Hash(input);\n        Console.WriteLine($\"SHA-256 Hash: {hash}\");\n    }\n\n    static string ComputeSha256Hash(string rawData)\n    {\n        using (SHA256 sha256Hash = SHA256.Create())\n        {\n            byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));\n            StringBuilder builder = new StringBuilder();\n            for (int i = 0; i < bytes.Length; i++)\n            {\n                builder.Append(bytes[i].ToString(\"x2\"));\n            }\n            return builder.ToString();\n        }\n    }\n}\n```\n\n### Library Dependencies\n\nThe above code example requires the following .NET libraries, which are part of the standard .NET framework and do not require additional installation:\n\n- `System`\n- `System.Security.Cryptography`\n- `System.Text`\n\n### Relevant Resources\n\n- [OWASP Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)\n- [OWASP Password Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html)\n- [CWE-327: Use of a Broken or Risky Cryptographic Algorithm](https://cwe.mitre.org/data/definitions/327.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS126858"
+                ]
+              }
+            },
+            {
+              "id": "glog-1163e375-0f13-4009-bd01-b0be610e1fe5",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Vulnerable/Compromised Hash Algorithm\" vulnerability in C# arises when cryptographic hash functions that are considered weak or compromised, such as MD5, are used. MD5 is known to be vulnerable to collision attacks, where two different inputs produce the same hash output. This makes it unsuitable for security-sensitive applications, such as password hashing or digital signatures.\n\n### General Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use stronger cryptographic hash functions, such as SHA-256 or SHA-3, which are considered secure against collision attacks. Additionally, for password hashing, consider using specialized algorithms like bcrypt, scrypt, or Argon2, which are designed to be computationally expensive and include a salt to protect against rainbow table attacks.\n\n### Source Code Fix Recommendation\n\nBelow is an example of how to replace MD5 with SHA-256 in C#:\n\n```csharp\nusing System;\nusing System.Security.Cryptography;\nusing System.Text;\n\nclass Program\n{\n    static void Main()\n    {\n        string input = \"example input\";\n        string hash = ComputeSha256Hash(input);\n        Console.WriteLine($\"SHA-256 Hash: {hash}\");\n    }\n\n    static string ComputeSha256Hash(string rawData)\n    {\n        using (SHA256 sha256Hash = SHA256.Create())\n        {\n            byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));\n            StringBuilder builder = new StringBuilder();\n            for (int i = 0; i < bytes.Length; i++)\n            {\n                builder.Append(bytes[i].ToString(\"x2\"));\n            }\n            return builder.ToString();\n        }\n    }\n}\n```\n\n### Library Dependencies\n\nThe above code example requires the following .NET libraries, which are part of the standard .NET framework and do not require additional installation:\n\n- `System`\n- `System.Security.Cryptography`\n- `System.Text`\n\n### Relevant Resources\n\n- [OWASP Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)\n- [OWASP Password Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html)\n- [CWE-327: Use of a Broken or Risky Cryptographic Algorithm](https://cwe.mitre.org/data/definitions/327.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS126858"
+                ]
+              }
+            },
+            {
+              "id": "glog-635056fa-3312-4baa-bebf-09e6f6c7cdd8",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Vulnerable/Compromised Hash Algorithm\" vulnerability in C# arises when cryptographic hash functions that are considered weak or compromised, such as MD5, are used. MD5 is known to be vulnerable to collision attacks, where two different inputs produce the same hash output. This makes it unsuitable for security-sensitive applications, such as password hashing or digital signatures.\n\n### General Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use stronger cryptographic hash functions, such as SHA-256 or SHA-3, which are considered secure against collision attacks. Additionally, for password hashing, consider using specialized algorithms like bcrypt, scrypt, or Argon2, which are designed to be computationally expensive and include a salt to protect against rainbow table attacks.\n\n### Source Code Fix Recommendation\n\nBelow is an example of how to replace MD5 with SHA-256 in C#:\n\n```csharp\nusing System;\nusing System.Security.Cryptography;\nusing System.Text;\n\nclass Program\n{\n    static void Main()\n    {\n        string input = \"example input\";\n        string hash = ComputeSha256Hash(input);\n        Console.WriteLine($\"SHA-256 Hash: {hash}\");\n    }\n\n    static string ComputeSha256Hash(string rawData)\n    {\n        using (SHA256 sha256Hash = SHA256.Create())\n        {\n            byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));\n            StringBuilder builder = new StringBuilder();\n            for (int i = 0; i < bytes.Length; i++)\n            {\n                builder.Append(bytes[i].ToString(\"x2\"));\n            }\n            return builder.ToString();\n        }\n    }\n}\n```\n\n### Library Dependencies\n\nThe above code example requires the following .NET libraries, which are part of the standard .NET framework and do not require additional installation:\n\n- `System`\n- `System.Security.Cryptography`\n- `System.Text`\n\n### Relevant Resources\n\n- [OWASP Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)\n- [OWASP Password Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html)\n- [CWE-327: Use of a Broken or Risky Cryptographic Algorithm](https://cwe.mitre.org/data/definitions/327.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS126858"
+                ]
+              }
+            },
+            {
+              "id": "glog-69a9a917-7952-43e0-a34a-a11a8f52ef34",
+              "help": {
+                "text": "",
+                "markdown": "### Description of \"Unsecured URL\" Vulnerability\n\nThe \"Unsecured URL\" vulnerability occurs when an application uses an insecure HTTP connection instead of HTTPS for transmitting sensitive data. This can lead to data interception, man-in-the-middle attacks, and exposure of sensitive information. In C# applications, this vulnerability can arise when making HTTP requests to external services without using secure protocols.\n\n### General Mitigation Advice\n\n1. **Use HTTPS**: Always use HTTPS instead of HTTP to ensure data is encrypted during transmission.\n2. **Validate Certificates**: Ensure that SSL/TLS certificates are valid and properly configured.\n3. **Use Security Libraries**: Utilize libraries that enforce secure connections and handle certificates properly.\n4. **Regular Updates**: Keep libraries and dependencies up to date to mitigate known vulnerabilities.\n\n### Source Code Fix Recommendation\n\nBelow is an example of how to fix an unsecured URL vulnerability in C# by using HTTPS:\n\n```csharp\nusing System;\nusing System.Net.Http;\nusing System.Threading.Tasks;\n\nclass Program\n{\n    static async Task Main()\n    {\n        using (HttpClient client = new HttpClient())\n        {\n            // Use HTTPS instead of HTTP\n            string url = \"https://www.thetvdb.com\";\n            HttpResponseMessage response = await client.GetAsync(url);\n            \n            if (response.IsSuccessStatusCode)\n            {\n                string responseData = await response.Content.ReadAsStringAsync();\n                Console.WriteLine(responseData);\n            }\n            else\n            {\n                Console.WriteLine(\"Error: Unable to access the URL.\");\n            }\n        }\n    }\n}\n```\n\n### Library Dependencies\n\nTo execute the above code, ensure you have the following library:\n\n- `System.Net.Http`: This is part of the .NET framework and does not require additional installation if you are using a recent version of .NET.\n\n### Relevant OWASP Resources\n\n- [OWASP Transport Layer Protection Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html)\n- [OWASP Secure Coding Practices - Quick Reference Guide](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n\n### Common Weakness Enumeration (CWE)\n\n- [CWE-319: Cleartext Transmission of Sensitive Information](https://cwe.mitre.org/data/definitions/319.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS137138"
+                ]
+              }
+            },
+            {
+              "id": "glog-a9d68dee-bc8f-4844-af73-85ff17a3bab1",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Vulnerable/Compromised Hash Algorithm\" vulnerability in C# refers to the use of cryptographic hash functions that are considered weak or compromised, such as SHA-1. SHA-1 is no longer considered secure due to its vulnerability to collision attacks, where two different inputs produce the same hash output. This can lead to security issues such as data integrity violations and unauthorized data manipulation.\n\n### General Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use stronger hash algorithms such as SHA-256 or SHA-3. These algorithms provide better security and are less susceptible to collision attacks.\n\n### Source Code Fix Recommendation\n\nIf your C# code is using SHA-1, you should replace it with a more secure algorithm like SHA-256. Below is an example of how to update your code:\n\n#### Before (Using SHA-1)\n\n```csharp\nusing System;\nusing System.Security.Cryptography;\nusing System.Text;\n\nclass Program\n{\n    static void Main()\n    {\n        string input = \"example\";\n        using (SHA1 sha1 = SHA1.Create())\n        {\n            byte[] hashBytes = sha1.ComputeHash(Encoding.UTF8.GetBytes(input));\n            string hash = BitConverter.ToString(hashBytes).Replace(\"-\", \"\").ToLowerInvariant();\n            Console.WriteLine($\"SHA-1 Hash: {hash}\");\n        }\n    }\n}\n```\n\n#### After (Using SHA-256)\n\n```csharp\nusing System;\nusing System.Security.Cryptography;\nusing System.Text;\n\nclass Program\n{\n    static void Main()\n    {\n        string input = \"example\";\n        using (SHA256 sha256 = SHA256.Create())\n        {\n            byte[] hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(input));\n            string hash = BitConverter.ToString(hashBytes).Replace(\"-\", \"\").ToLowerInvariant();\n            Console.WriteLine($\"SHA-256 Hash: {hash}\");\n        }\n    }\n}\n```\n\n### Library Dependencies\n\nThe above code examples require the following .NET libraries:\n\n- `System`\n- `System.Security.Cryptography`\n- `System.Text`\n\nThese libraries are part of the .NET framework and do not require additional installation.\n\n### Relevant OWASP Resources\n\n- [OWASP Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)\n- [OWASP Top Ten 2021](https://owasp.org/Top10/)\n\n### Common Weakness Enumeration (CWE)\n\n- [CWE-327: Use of a Broken or Risky Cryptographic Algorithm](https://cwe.mitre.org/data/definitions/327.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS126858"
+                ]
+              }
+            },
+            {
+              "id": "glog-d8731323-9af9-49b5-9f76-ee78941e8cb4",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nIn C# programming, storing tokens or keys directly in the source code is a common security vulnerability. This practice can lead to unauthorized access if the source code is exposed, as attackers can easily extract sensitive information such as API keys, database credentials, or encryption keys. This vulnerability is particularly dangerous in public repositories or when the code is shared with untrusted parties.\n\n### General Mitigation Advice\n\n1. **Environment Variables**: Store sensitive information in environment variables instead of hardcoding them in the source code.\n2. **Configuration Files**: Use configuration files that are not included in version control systems. Ensure these files are encrypted or access-controlled.\n3. **Secrets Management Tools**: Utilize secrets management tools like Azure Key Vault, AWS Secrets Manager, or HashiCorp Vault to securely store and access sensitive information.\n4. **Access Control**: Limit access to the source code and ensure that only authorized personnel can view or modify it.\n5. **Code Reviews**: Implement regular code reviews to detect and remove any hardcoded secrets.\n\n### Source Code Fix Recommendation\n\nBelow is an example of how to refactor code to avoid storing tokens or keys directly in the source code:\n\n#### Vulnerable Code\n\n```csharp\npublic class ApiClient\n{\n    private const string ApiKey = \"4219e299c89411838049ab0dab19ebd5\";\n\n    public void Connect()\n    {\n        // Use the API key to connect to the service\n    }\n}\n```\n\n#### Fixed Code\n\n```csharp\npublic class ApiClient\n{\n    private readonly string _apiKey;\n\n    public ApiClient()\n    {\n        _apiKey = Environment.GetEnvironmentVariable(\"API_KEY\");\n        if (string.IsNullOrEmpty(_apiKey))\n        {\n            throw new InvalidOperationException(\"API key is not set in the environment variables.\");\n        }\n    }\n\n    public void Connect()\n    {\n        // Use the API key to connect to the service\n    }\n}\n```\n\n### Library Dependencies\n\nThe example code provided does not require any additional library dependencies to execute properly, as it uses the `System` namespace which is part of the .NET framework.\n\n### OWASP Resources\n\n- [OWASP Top Ten: A6:2017-Security Misconfiguration](https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration)\n- [OWASP Cheat Sheet: Secrets Management](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html)\n\n### Common Weakness Enumeration (CWE)\n\n- [CWE-798: Use of Hard-coded Credentials](https://cwe.mitre.org/data/definitions/798.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS173237"
+                ]
+              }
+            },
+            {
+              "id": "glog-f4876939-f152-4e7f-a74f-1c7919952f17",
+              "help": {
+                "text": "",
+                "markdown": "### Description of \"Unsecured URL\" Vulnerability\n\nThe \"Unsecured URL\" vulnerability occurs when an application uses URLs that are not secured with HTTPS, potentially exposing sensitive data to interception or tampering by attackers. In C# applications, this can happen when making HTTP requests to external services without using secure protocols.\n\n### General Mitigation Advice\n\n1. **Use HTTPS**: Always use HTTPS instead of HTTP to ensure that data is encrypted during transmission.\n2. **Validate Certificates**: Ensure that SSL/TLS certificates are valid and properly configured.\n3. **Update Libraries**: Regularly update libraries and dependencies to their latest versions to benefit from security patches.\n4. **Security Headers**: Implement security headers like Strict-Transport-Security (HSTS) to enforce secure connections.\n\n### Source Code Fix Recommendation\n\nBelow is an example of how to fix an unsecured URL vulnerability in C# by using HTTPS:\n\n```csharp\nusing System;\nusing System.Net.Http;\nusing System.Threading.Tasks;\n\nclass Program\n{\n    static async Task Main()\n    {\n        using (HttpClient client = new HttpClient())\n        {\n            // Use HTTPS instead of HTTP\n            string url = \"https://tvlistings.zap2it.com\";\n            HttpResponseMessage response = await client.GetAsync(url);\n            \n            if (response.IsSuccessStatusCode)\n            {\n                string content = await response.Content.ReadAsStringAsync();\n                Console.WriteLine(content);\n            }\n            else\n            {\n                Console.WriteLine(\"Error: Unable to retrieve data.\");\n            }\n        }\n    }\n}\n```\n\n### Library Dependencies\n\nTo execute the above code, ensure you have the following library dependencies:\n\n- .NET Core SDK or .NET Framework\n- System.Net.Http (included in .NET Core and .NET Framework)\n\n### OWASP Resources\n\n- [OWASP Transport Layer Protection Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Protection_Cheat_Sheet.html)\n- [OWASP Secure Headers Project](https://owasp.org/www-project-secure-headers/)\n\n### Common Weakness Enumeration (CWE)\n\n- [CWE-319: Cleartext Transmission of Sensitive Information](https://cwe.mitre.org/data/definitions/319.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS137138"
+                ]
+              }
+            },
+            {
+              "id": "glog-db90d979-5b1f-46fb-b3db-97f1ca3d42f3",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Vulnerable/Compromised Hash Algorithm\" vulnerability in C# arises when cryptographic hash functions that are considered weak or compromised, such as MD5, are used. MD5 is known to be vulnerable to collision attacks, where two different inputs produce the same hash output. This makes it unsuitable for security-sensitive applications, such as password hashing or digital signatures.\n\n### General Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to use stronger cryptographic hash functions, such as SHA-256 or SHA-3, which are considered secure against collision attacks. Additionally, for password hashing, consider using specialized algorithms like bcrypt, scrypt, or Argon2, which are designed to be computationally expensive and include a salt to protect against rainbow table attacks.\n\n### Source Code Fix Recommendation\n\nBelow is an example of how to replace MD5 with SHA-256 in C#:\n\n```csharp\nusing System;\nusing System.Security.Cryptography;\nusing System.Text;\n\nclass Program\n{\n    static void Main()\n    {\n        string input = \"example input\";\n        string hash = ComputeSha256Hash(input);\n        Console.WriteLine($\"SHA-256 Hash: {hash}\");\n    }\n\n    static string ComputeSha256Hash(string rawData)\n    {\n        using (SHA256 sha256Hash = SHA256.Create())\n        {\n            byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));\n            StringBuilder builder = new StringBuilder();\n            for (int i = 0; i < bytes.Length; i++)\n            {\n                builder.Append(bytes[i].ToString(\"x2\"));\n            }\n            return builder.ToString();\n        }\n    }\n}\n```\n\n### Library Dependencies\n\nThe above code example requires the following .NET libraries, which are part of the standard .NET framework and do not require additional installation:\n\n- `System`\n- `System.Security.Cryptography`\n- `System.Text`\n\n### Relevant Resources\n\n- [OWASP Cryptographic Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html)\n- [OWASP Password Storage Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html)\n- [CWE-327: Use of a Broken or Risky Cryptographic Algorithm](https://cwe.mitre.org/data/definitions/327.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS126858"
+                ]
+              }
+            }
+          ],
+          "language": "en-US",
+          "contents": [
+            "localizedData",
+            "nonLocalizedData"
+          ],
+          "isComprehensive": false
+        }
+      },
+      "language": "en-US",
+      "results": [
+        {
+          "ruleId": "glog-53ff2604-62e6-43ff-a457-bd20c3696193",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Weak/Broken Hash Algorithm"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "MediaBrowser.Controller/Session/AuthenticationRequest.cs"
+                },
+                "region": {
+                  "startLine": 18,
+                  "startColumn": 30,
+                  "endLine": 18,
+                  "endColumn": 34,
+                  "charOffset": 378,
+                  "charLength": 4,
+                  "snippet": {
+                    "text": "Sha1",
+                    "rendered": {
+                      "text": "Sha1",
+                      "markdown": "`Sha1`"
+                    }
+                  },
+                  "sourceLanguage": "csharp"
+                }
+              }
+            }
+          ],
+          "fixes": [],
+          "properties": {
+            "DevSkimSeverity": "Critical",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "Cryptography.BannedHashAlgorithm"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-90c1521c-6ee0-440c-be56-440424c3e8af",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Weak/Broken Hash Algorithm"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Jellyfin.LiveTv/Listings/SchedulesDirectDtos/LogoDto.cs"
+                },
+                "region": {
+                  "startLine": 32,
+                  "startColumn": 23,
+                  "endLine": 32,
+                  "endColumn": 26,
+                  "charOffset": 790,
+                  "charLength": 3,
+                  "snippet": {
+                    "text": "Md5",
+                    "rendered": {
+                      "text": "Md5",
+                      "markdown": "`Md5`"
+                    }
+                  },
+                  "sourceLanguage": "csharp"
+                }
+              }
+            }
+          ],
+          "fixes": [],
+          "properties": {
+            "DevSkimSeverity": "Critical",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "Cryptography.BannedHashAlgorithm"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-08f0464b-3995-445a-8fbc-fcfcc7e3fee8",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Weak/Broken Hash Algorithm"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Jellyfin.LiveTv/Listings/SchedulesDirectDtos/MetadataScheduleDto.cs"
+                },
+                "region": {
+                  "startLine": 21,
+                  "startColumn": 23,
+                  "endLine": 21,
+                  "endColumn": 26,
+                  "charOffset": 537,
+                  "charLength": 3,
+                  "snippet": {
+                    "text": "Md5",
+                    "rendered": {
+                      "text": "Md5",
+                      "markdown": "`Md5`"
+                    }
+                  },
+                  "sourceLanguage": "csharp"
+                }
+              }
+            }
+          ],
+          "fixes": [],
+          "properties": {
+            "DevSkimSeverity": "Critical",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "Cryptography.BannedHashAlgorithm"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-1163e375-0f13-4009-bd01-b0be610e1fe5",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Weak/Broken Hash Algorithm"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Jellyfin.LiveTv/Listings/SchedulesDirectDtos/ProgramDetailsDto.cs"
+                },
+                "region": {
+                  "startLine": 136,
+                  "startColumn": 23,
+                  "endLine": 136,
+                  "endColumn": 26,
+                  "charOffset": 4309,
+                  "charLength": 3,
+                  "snippet": {
+                    "text": "Md5",
+                    "rendered": {
+                      "text": "Md5",
+                      "markdown": "`Md5`"
+                    }
+                  },
+                  "sourceLanguage": "csharp"
+                }
+              }
+            }
+          ],
+          "fixes": [],
+          "properties": {
+            "DevSkimSeverity": "Critical",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "Cryptography.BannedHashAlgorithm"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-635056fa-3312-4baa-bebf-09e6f6c7cdd8",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Weak/Broken Hash Algorithm"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Jellyfin.LiveTv/Listings/SchedulesDirectDtos/ProgramDto.cs"
+                },
+                "region": {
+                  "startLine": 34,
+                  "startColumn": 23,
+                  "endLine": 34,
+                  "endColumn": 26,
+                  "charOffset": 895,
+                  "charLength": 3,
+                  "snippet": {
+                    "text": "Md5",
+                    "rendered": {
+                      "text": "Md5",
+                      "markdown": "`Md5`"
+                    }
+                  },
+                  "sourceLanguage": "csharp"
+                }
+              }
+            }
+          ],
+          "fixes": [],
+          "properties": {
+            "DevSkimSeverity": "Critical",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "Cryptography.BannedHashAlgorithm"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-69a9a917-7952-43e0-a34a-a11a8f52ef34",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Insecure URL"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "MediaBrowser.XbmcMetadata/Savers/SeriesNfoSaver.cs"
+                },
+                "region": {
+                  "startLine": 73,
+                  "startColumn": 25,
+                  "endLine": 73,
+                  "endColumn": 47,
+                  "charOffset": 2795,
+                  "charLength": 22,
+                  "snippet": {
+                    "text": "http://www.thetvdb.com",
+                    "rendered": {
+                      "text": "http://www.thetvdb.com",
+                      "markdown": "`http://www.thetvdb.com`"
+                    }
+                  },
+                  "sourceLanguage": "csharp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "An HTTP-based URL without TLS was detected."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "MediaBrowser.XbmcMetadata/Savers/SeriesNfoSaver.cs"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 2795,
+                        "charLength": 22
+                      },
+                      "insertedContent": {
+                        "text": "https://www.thetvdb.com"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Moderate",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "ThreatModel.Integration.HTTP"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-a9d68dee-bc8f-4844-af73-85ff17a3bab1",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Weak/Broken Hash Algorithm"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Jellyfin.Api/Controllers/LiveTvController.cs"
+                },
+                "region": {
+                  "startLine": 1033,
+                  "startColumn": 60,
+                  "endLine": 1033,
+                  "endColumn": 64,
+                  "charOffset": 49939,
+                  "charLength": 4,
+                  "snippet": {
+                    "text": "Sha1",
+                    "rendered": {
+                      "text": "Sha1",
+                      "markdown": "`Sha1`"
+                    }
+                  },
+                  "sourceLanguage": "csharp"
+                }
+              }
+            }
+          ],
+          "fixes": [],
+          "properties": {
+            "DevSkimSeverity": "Critical",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "Cryptography.BannedHashAlgorithm"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-d8731323-9af9-49b5-9f76-ee78941e8cb4",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Do not store tokens or keys in source code."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "MediaBrowser.Providers/Plugins/Tmdb/TmdbUtils.cs"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 37,
+                  "endLine": 29,
+                  "endColumn": 71,
+                  "charOffset": 832,
+                  "charLength": 34,
+                  "snippet": {
+                    "text": "\"4219e299c89411838049ab0dab19ebd5\"",
+                    "rendered": {
+                      "text": "\"4219e299c89411838049ab0dab19ebd5\"",
+                      "markdown": "`\"4219e299c89411838049ab0dab19ebd5\"`"
+                    }
+                  },
+                  "sourceLanguage": "csharp"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Important",
+            "DevSkimConfidence": "Medium",
+            "tags": [
+              "Implementation.Privacy.Token"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-f4876939-f152-4e7f-a74f-1c7919952f17",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Insecure URL"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "MediaBrowser.Providers/TV/Zap2ItExternalUrlProvider.cs"
+                },
+                "region": {
+                  "startLine": 21,
+                  "startColumn": 27,
+                  "endLine": 21,
+                  "endColumn": 55,
+                  "charOffset": 576,
+                  "charLength": 28,
+                  "snippet": {
+                    "text": "http://tvlistings.zap2it.com",
+                    "rendered": {
+                      "text": "http://tvlistings.zap2it.com",
+                      "markdown": "`http://tvlistings.zap2it.com`"
+                    }
+                  },
+                  "sourceLanguage": "csharp"
+                }
+              }
+            }
+          ],
+          "fixes": [
+            {
+              "description": {
+                "text": "An HTTP-based URL without TLS was detected."
+              },
+              "artifactChanges": [
+                {
+                  "artifactLocation": {
+                    "uri": "MediaBrowser.Providers/TV/Zap2ItExternalUrlProvider.cs"
+                  },
+                  "replacements": [
+                    {
+                      "deletedRegion": {
+                        "charOffset": 576,
+                        "charLength": 28
+                      },
+                      "insertedContent": {
+                        "text": "https://tvlistings.zap2it.com"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Moderate",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "ThreatModel.Integration.HTTP"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-db90d979-5b1f-46fb-b3db-97f1ca3d42f3",
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Weak/Broken Hash Algorithm"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/Jellyfin.LiveTv/Listings/SchedulesDirect.cs"
+                },
+                "region": {
+                  "startLine": 287,
+                  "startColumn": 35,
+                  "endLine": 287,
+                  "endColumn": 38,
+                  "charOffset": 11617,
+                  "charLength": 3,
+                  "snippet": {
+                    "text": "Md5",
+                    "rendered": {
+                      "text": "Md5",
+                      "markdown": "`Md5`"
+                    }
+                  },
+                  "sourceLanguage": "csharp"
+                }
+              }
+            }
+          ],
+          "fixes": [],
+          "properties": {
+            "DevSkimSeverity": "Critical",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "Cryptography.BannedHashAlgorithm"
+            ]
+          }
+        }
+      ],
+      "newlineSequences": [
+        "\r\n",
+        "\n"
+      ]
+    }
+  ]
+}
